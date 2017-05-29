@@ -69,3 +69,7 @@ Route::get('/getJSON', 'MyController@getJSON');
 View::share('name', "Dinh Long");
 Route::get('/myView', 'MyController@myView');
 Route::get('/viewID/{id}', 'MyController@viewId');
+
+Route::get('/blade', function() {
+  return view('pages.php');
+});
