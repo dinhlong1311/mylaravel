@@ -14,7 +14,7 @@ class MyController extends Controller
 
   public function khoahoc($kh) {
     echo "Khoa hoc ".$kh;
-    return redirect()->route('homepage');
+    // return redirect()->route('homepage');
   }
 
   public function GetURL(Request $req) {
@@ -32,8 +32,8 @@ class MyController extends Controller
   }
 
   public function postForm(Request $req) {
-    echo $req->user;
-    echo $req->pass;
+    $form = ['user'=>$req->user, 'pass'=>$req->pass];
+    return response()->json($form);
   }
 
   public function setCookie() {
@@ -65,5 +65,15 @@ class MyController extends Controller
   }
   public function viewID($id) {
     return view('view.myView',['i'=>$id]);
+  }
+
+  public function bladeTemplate($string) {
+    if ($string=='laravel') {
+      return view('pages.laravel');
+    } elseif ($string=='php') {
+      return view('pages.php');
+    } else {
+      return redirect()->route('homepage');
+    }
   }
 }

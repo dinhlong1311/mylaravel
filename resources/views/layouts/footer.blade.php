@@ -1,3 +1,4 @@
+<p>@copyright by <a href="https://facebook.com/dinhlong.hoo">Dragon Hoo</a></p>
 <!-- SCRIPTS -->
 <!-- JQuery -->
 <script type="text/javascript" src="{{ asset('public/js/jquery-3.1.1.min.js') }}"></script>

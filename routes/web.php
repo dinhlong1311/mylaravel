@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('homepage');
 
-Route::get('/hello', function() {
+Route::get('hello', function() {
   return "Hello World";
 })->name('hello');
 
@@ -26,50 +26,48 @@ Route::get('/hi', function() {
 Route::get('NgonNgu/PHP', function() {
   return "<h1>Lập trình Web bằng PHP</h1>";
 });
-Route::get('/ten/{name}', function($name) {
+Route::get('ten/{name}', function($name) {
   echo "Xin chao ".$name;
 })->where(['name'=>'[a-zA-Z]+']);
 
-Route::get('/404', function() {
+Route::get('404', function() {
   return redirect()->route('homepage');
 });
 
 Route::group(['prefix'=>'user'], function() {
-  Route::get('/user1', function() {
+  Route::get('user1', function() {
     return "Xin chào User1";
   });
-  Route::get('/user2', function() {
+  Route::get('user2', function() {
     return "Xin chào User2";
   });
-  Route::get('/user3', function() {
+  Route::get('user3', function() {
     return "Xin chào User3";
   });
 });
 
-Route::get('/xinchao', 'MyController@xinchao');
-Route::get('/khoahoc/{kh}', 'MyController@khoahoc');
+Route::get('xinchao', 'MyController@xinchao');
+Route::get('khoahoc/{kh}', 'MyController@khoahoc');
 
-Route::get('/my-url', 'MyController@GetURL');
+Route::get('my-url', 'MyController@GetURL');
 
-Route::get('/getForm', function() {
+Route::get('getForm', function() {
   return view('postForm');
 });
-Route::post('/postForm', 'MyController@postForm')->name('postForm');
+Route::post('postForm', 'MyController@postForm')->name('postForm');
 
-Route::get('/setCookie', 'MyController@setCookie');
-Route::get('/getCookie', 'MyController@getCookie');
+Route::get('setCookie', 'MyController@setCookie');
+Route::get('getCookie', 'MyController@getCookie');
 
-Route::get('/uploadFile', function() {
+Route::get('uploadFile', function() {
   return view('postFile');
 });
-Route::post('/postFile', 'MyController@postFile')->name('postFile');
+Route::post('postFile', 'MyController@postFile')->name('postFile');
 
-Route::get('/getJSON', 'MyController@getJSON');
-	
+Route::get('getJSON', 'MyController@getJSON');
+
 View::share('name', "Dinh Long");
-Route::get('/myView', 'MyController@myView');
-Route::get('/viewID/{id}', 'MyController@viewId');
+Route::get('myView', 'MyController@myView');
+Route::get('viewID/{id}', 'MyController@viewId');
 
-Route::get('/blade', function() {
-  return view('pages.php');
-});
+Route::get('blade/{str}', 'MyController@bladeTemplate');
