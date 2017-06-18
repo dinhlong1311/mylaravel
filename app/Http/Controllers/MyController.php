@@ -68,10 +68,11 @@ class MyController extends Controller
   }
 
   public function bladeTemplate($string) {
+    $khoahoc = "<b>Học Laravel Framework cơ bản</b>";
     if ($string=='laravel') {
-      return view('pages.laravel');
+      return view('pages.laravel', ['kh'=>$khoahoc]);
     } elseif ($string=='php') {
-      return view('pages.php');
+      return view('pages.php', ['kh'=>$khoahoc]);
     } else {
       return redirect()->route('homepage');
     }
