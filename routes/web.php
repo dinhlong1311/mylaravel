@@ -71,3 +71,15 @@ Route::get('myView', 'MyController@myView');
 Route::get('viewID/{id}', 'MyController@viewId');
 
 Route::get('blade/{str}', 'MyController@bladeTemplate');
+
+//Database
+Route::get('mysql', function() {
+  Schema::create('user', function($table) {
+    $table->increments('id');
+    $table->string('email', 50);
+    $table->string('password');
+    $table->integer('role')->default('0');
+    $table->timestamps();
+  });
+  echo "Da tao database";
+});
