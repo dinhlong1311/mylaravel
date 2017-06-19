@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+        $this->call(AdminTableSeeder::class);
         $this->call(RolesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
     }
@@ -24,8 +25,20 @@ class RolesTableSeeder extends Seeder
   {
     DB::table('roles')->insert([
       ['role'=>'Admin'],
+      ['role'=>'Editor'],
       ['role'=>'Writer'],
-      ['role'=>'Editor']
+      ['role'=>'User']
+    ]);
+  }
+}
+
+// Admin Table Seeder
+class AdminTableSeeder extends Seeder
+{
+  public function run()
+  {
+    DB::table('admin')->insert([
+      'name'=>'Admin', 'email'=>'admin@dinhlong.com', 'password'=>bcrypt('123456')
     ]);
   }
 }
@@ -36,9 +49,9 @@ class UsersTableSeeder extends Seeder
   public function run()
   {
     DB::table('users')->insert([
-      ['name'=>'Admin', 'email'=>'admin@dinhlong.com', 'password'=>bcrypt('123456'), 'role_id'=>'1'],
-      ['name'=>'Writer', 'email'=>'dinhlong.hoo@gmail.com', 'password'=>bcrypt('123456'), 'role_id'=>'2'],
-      ['name'=>'Editor', 'email'=>'dinhlong.hoo@outlook.com', 'password'=>bcrypt('123456'), 'role_id'=>'3']
+      ['name'=>'Editor', 'email'=>'dinhlong.hoo@outlook.com', 'password'=>bcrypt('123456')],
+      ['name'=>'Writer', 'email'=>'dinhlong.hoo@gmail.com', 'password'=>bcrypt('123456')],
+      ['name'=>'User', 'email'=>'anonymous@gmail.com', 'password'=>bcrypt('123456')]
     ]);
   }
 }

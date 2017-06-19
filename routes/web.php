@@ -72,7 +72,7 @@ Route::get('viewID/{id}', 'MyController@viewId');
 
 Route::get('blade/{str}', 'MyController@bladeTemplate');
 
-//Database
+// Database
 Route::get('mysql', function() {
   Schema::create('user', function($table) {
     $table->increments('id');
@@ -82,4 +82,64 @@ Route::get('mysql', function() {
     $table->timestamps();
   });
   echo "Da tao database";
+});
+
+// Query Builder
+Route::get('qb/get', function() {
+  $data = DB::table('users')->select('id','name','email','role_id')->orderBy('id','desc')->get();
+  foreach($data as $row) {
+    foreach($row as $key=>$value) {
+      echo $key.': '.$value.'</br>';
+    }
+    echo '<hr/>';
+  }
+});
+
+Route::get('qb/where', function() {
+  $data = DB::table('users')
+          ->select('id','name','email','role_id')
+          ->where('id',1)
+          ->get();
+  foreach($data as $row) {
+    foreach($row as $key=>$value) {
+      echo $key.': '.$value.'</br>';
+    }
+    echo '<hr/>';
+  }
+});
+
+Route::get('qb/join', function() {
+  $data = DB::table('users')
+          ->join('roles','users.role_id','=','roles.id')
+          ->select(DB::raw('users.id, users.name, users.email, roles.role as vaitro'))
+          ->get();
+  foreach($data as $row) {
+    foreach($row as $key=>$value) {
+      echo $key.': '.$value.'</br>';
+    }
+    echo '<hr/>';
+  }
+});
+
+Route::get('qb/limit', function() {
+  $data = DB::table('users')
+          ->select('id','name','email','role_id')
+          ->skip(2)->take(2)->get();
+  foreach($data as $row) {
+    foreach($row as $key=>$value) {
+      echo $key.': '.$value.'</br>';
+    }
+    echo '<hr/>';
+  }
+});
+
+Route::get('qb/insert', function() {
+  DB::table('users')
+      ->insert(['name'=>'Long Ho', 'email'=>'spy123@gmail.com', 'password'=>bcrypt('123456')]);
+  echo "Inserted!!!";
+});
+
+Route::get('qb/update/{id}', function($id) {
+  DB::table('users')->where('id',$id)->update(['role'=>2]);
+  echo "Updated!!!";
 });
