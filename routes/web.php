@@ -109,9 +109,9 @@ Route::get('qb/where', function() {
 });
 
 Route::get('qb/join', function() {
-  $data = DB::table('users')
-          ->join('roles','users.role_id','=','roles.id')
-          ->select(DB::raw('users.id, users.name, users.email, roles.role as vaitro'))
+  $data = DB::table('products')
+          ->join('categories','products.id_category','=','categories.id')
+          ->select(DB::raw('products.id, products.name, products.decription, categories.name as ten_cate'))
           ->get();
   foreach($data as $row) {
     foreach($row as $key=>$value) {
@@ -142,4 +142,31 @@ Route::get('qb/insert', function() {
 Route::get('qb/update/{id}', function($id) {
   DB::table('users')->where('id',$id)->update(['role'=>2]);
   echo "Updated!!!";
+});
+
+// Model
+Route::get('model/save/{ten}', function($ten) {
+  $user = new App\User();
+
+  $user->name = $ten;
+  $user->email = str_random(10).'@gmail.com';
+  $user->password = bcrypt('123456');
+
+  $user->save();
+  echo 'Da luu ten '.$ten;
+})->where(['ten'=>'[a-zA-Z ]+']);
+
+Route::get('model/get', function() {
+  $data = App\Role::all()->toJson();
+  var_dump($data);
+});
+
+Route::get('product/findid', function() {
+  $data = App\Product::find(2)->category->toArray();
+  var_dump($data);
+});
+
+Route::get('category/getbyid', function() {
+  $data = App\Category::find(1)->products->toArray();
+  var_dump($data);
 });
