@@ -170,3 +170,12 @@ Route::get('category/getbyid', function() {
   $data = App\Category::find(1)->products->toArray();
   var_dump($data);
 });
+
+// Middleware
+Route::get('diem',['middleware'=>'MyMiddleware', function() {
+  echo "Ban da co diem";
+}]);
+
+Route::get('loi', function() {
+  echo "Ban chua co diem";
+})->name('loi');
