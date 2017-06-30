@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        $this->call(AdminTableSeeder::class);
+        $this->call(AdminsTableSeeder::class);
         $this->call(RolesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
@@ -34,12 +34,12 @@ class RolesTableSeeder extends Seeder
   }
 }
 
-// Admin Table Seeder
-class AdminTableSeeder extends Seeder
+// Admins Table Seeder
+class AdminsTableSeeder extends Seeder
 {
   public function run()
   {
-    DB::table('admin')->insert([
+    DB::table('admins')->insert([
       'name'=>'Admin', 'email'=>'admin@dinhlong.com', 'password'=>bcrypt('123456')
     ]);
   }

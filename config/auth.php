@@ -45,6 +45,12 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+        // Admin custom driver
+        'web_admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+         ],
     ],
 
     /*
@@ -74,6 +80,12 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        // User Provider for admins
+       'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
+       ],
     ],
 
     /*

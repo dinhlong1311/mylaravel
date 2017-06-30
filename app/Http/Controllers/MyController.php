@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
+use App\Admin;
 
 class MyController extends Controller
 {
@@ -75,6 +77,19 @@ class MyController extends Controller
       return view('pages.php', ['kh'=>$khoahoc]);
     } else {
       return redirect()->route('homepage');
+    }
+  }
+
+  public function loginUser(Request $request) {
+    $email = $request['email'];
+    $password = $request['password'];
+    $data = ['email'=>$email, 'password'=>$password];
+
+    if(Auth::attempt($data)) {
+      return view('login_success',['user'=>Auth::user()]);
+    }
+    else {
+      return view('login', ['error'=>'Email hoặc Password không đúng']);
     }
   }
 }

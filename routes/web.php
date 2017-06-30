@@ -179,3 +179,17 @@ Route::get('diem',['middleware'=>'MyMiddleware', function() {
 Route::get('loi', function() {
   echo "Ban chua co diem";
 })->name('loi');
+
+// Auth
+Route::get('login', function() {
+  return view('login');
+});
+Route::post('login', 'MyController@loginUser')->name('loginUser');
+
+Route::get('admin/auth/login', function() {
+  return view('loginAdmin');
+});
+Route::post('admin/auth/login', 'AdminController@loginAdmin')->name('loginAdmin');
+Route::get('admin/dashboard', function() {
+  return view('admin_dashboard');
+})->name('admin_dashboard');
