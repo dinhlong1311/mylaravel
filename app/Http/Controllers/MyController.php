@@ -92,4 +92,13 @@ class MyController extends Controller
       return view('login', ['error'=>'Email hoặc Password không đúng']);
     }
   }
+
+  public function session(Request $request)
+  {
+    if(!$request->session()->exists('user_id')) {
+      $request->session()->put('user_id','dinhlong.hoo@outlook.com');
+    }
+    $user_id =  $request->session()->get('user_id');
+    echo $user_id;
+  }
 }

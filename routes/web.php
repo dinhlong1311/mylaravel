@@ -193,3 +193,21 @@ Route::post('admin/auth/login', 'AdminController@loginAdmin')->name('loginAdmin'
 Route::get('admin/dashboard', function() {
   return view('admin_dashboard');
 })->name('admin_dashboard');
+
+// Session
+Route::get('session', function() {
+  $session = session('name', 'Long Hoo');
+  echo $session;
+});
+Route::get('session/get', 'MyController@session');
+Route::get('session/check', function() {
+  if(session()->has('user_id')) {
+    echo "Session da duoc tao!!!";
+  } else {
+    echo "Session khong duoc tao!!!";
+  }
+});
+Route::get('session/delete', function() {
+  session()->flush();
+  echo "Da xoa tat ca Session";
+});
