@@ -211,3 +211,10 @@ Route::get('session/delete', function() {
   session()->flush();
   echo "Da xoa tat ca Session";
 });
+
+// Paginate
+Route::get('paginate', function() {
+  $users = DB::table('users')->paginate(2);
+  return view('paginate',['users'=>$users]);
+  // var_dump($users);
+});
